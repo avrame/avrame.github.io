@@ -1,0 +1,32 @@
+#game_area {
+  display: grid;
+  grid-template-columns: repeat(10, 24px);
+  grid-template-rows: repeat(18, 24px);
+  column-gap: 1px;
+  row-gap: 1px;
+  width: calc(10 * 25px - 1px);
+  margin: 0 auto;
+}
+#game_area b {
+  background: #EEE;
+  border-radius: 2px;
+}
+
+#game_area .r {
+  background: rgb(192, 64, 64);
+}
+#game_area .g {
+  background: rgb(92, 168, 92);
+}
+#game_area .b {
+  background: rgb(96, 96, 255);
+}
+#game_area .y {
+  background: rgb(255, 192, 32);
+}
+#game_area .o {
+  background: rgb(255, 128, 32);
+}
+#game_area .p {
+  background: rgb(128, 64, 192);
+}
