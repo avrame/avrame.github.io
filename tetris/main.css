@@ -8,25 +8,30 @@
   margin: 0 auto;
 }
 #game_area b {
-  background: #EEE;
+  background-color: #EEE;
   border-radius: 2px;
 }
 
 #game_area .r {
-  background: rgb(192, 64, 64);
+  background-color: rgb(192, 64, 64);
 }
 #game_area .g {
-  background: rgb(92, 168, 92);
+  background-color: rgb(92, 168, 92);
 }
 #game_area .b {
-  background: rgb(96, 96, 255);
+  background-color: rgb(96, 96, 255);
 }
 #game_area .y {
-  background: rgb(255, 192, 32);
+  background-color: rgb(255, 192, 32);
 }
 #game_area .o {
-  background: rgb(255, 128, 32);
+  background-color: rgb(255, 128, 32);
 }
 #game_area .p {
-  background: rgb(128, 64, 192);
+  background-color: rgb(128, 64, 192);
+}
+
+#game_area .fade {
+  background-color: #EEE;
+  transition: background-color .5s linear;
 }
