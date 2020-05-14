@@ -81,7 +81,7 @@ function freezeCheckRowsNewTet() {
 
 // On Keydown
 document.body.addEventListener('keydown', (ev) => {
-  // console.log(ev.key)
+  // console.log(ev)
   const key = ev.key;
   Keyboard.setKeyDown(key);
 
@@ -94,6 +94,12 @@ document.body.addEventListener('keydown', (ev) => {
       startDropInterval();
       Keyboard.startKeypressInterval();
     }
+  }
+
+  // If spacebar
+  if (key === ' ') {
+    tetronimo.quickDrop();
+    freezeCheckRowsNewTet();
   }
 });
 

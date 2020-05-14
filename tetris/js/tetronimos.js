@@ -35,6 +35,14 @@ class Tetronimo {
     return true;
   }
 
+  quickDrop() {
+    this.clear();
+    while(!this.cantMove(this.y + 1, this.x, this.rotation)) {
+      this.y += 1;
+    }
+    this.render();
+  }
+
   rotateCW() {
     let rotation = this.rotation;
     if (rotation === this.orientations.length - 1) {
