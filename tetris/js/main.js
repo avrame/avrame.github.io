@@ -1,12 +1,47 @@
 import Grid from './grid.js';
+import Keyboard from './keyboard.js';
 import { create_HTML_Grid, getRandomTet } from './utils.js';
 
 let dropSpeed = 1500;
 let dropInterval;
 let tetronimo;
+let paused = false;
+
+// Get audio elements
 const moveSound = document.getElementById('move_sound');
 const rotateSound = document.getElementById('rotate_sound');
 const landSound = document.getElementById('land_sound');
+
+// Assign key handlers
+Keyboard.assignHandler('ArrowDown', () => {
+  if (!tetronimo.isFrozen && !tetronimo.moveDown()) {
+    freezeCheckRowsNewTet();
+  }
+});
+
+Keyboard.assignHandler('ArrowLeft', () => {
+  if (tetronimo.moveLeft()) {
+    moveSound.play();
+  }
+});
+
+Keyboard.assignHandler('ArrowRight', () => {
+  if (tetronimo.moveRight()) {
+    moveSound.play();
+  }
+});
+
+Keyboard.assignHandler('x', () => {
+  if (tetronimo.rotateCW()) {
+    rotateSound.play();
+  }
+});
+
+Keyboard.assignHandler('z', () => {
+  if (tetronimo.rotateCCW()) {
+    rotateSound.play();
+  }
+});
 
 create_HTML_Grid();
 new Grid();
@@ -15,13 +50,16 @@ startGame();
 function startGame() {
   tetronimo = getRandomTet();
   startDropInterval();
+  Keyboard.startKeypressInterval();
 }
 
 function startDropInterval() {
   dropInterval = setInterval(() => {
-    let canDrop = tetronimo.moveDown();
-    if (!canDrop) {
-      freezeCheckRowsNewTet();
+    if (!Keyboard.map['ArrowDown'].pressed) { 
+      let canDrop = tetronimo.moveDown();
+      if (!canDrop) {
+        freezeCheckRowsNewTet();
+      }
     }
   }, dropSpeed);
 }
@@ -38,33 +76,26 @@ function freezeCheckRowsNewTet() {
   }, timeOut);
 }
 
+// On Keydown
 document.body.addEventListener('keydown', (ev) => {
   // console.log(ev.key)
-  switch(ev.key) {
-    case 'ArrowLeft':
-      if (tetronimo.moveLeft()) {
-        moveSound.play();
-      }
-      break;
-    case 'ArrowRight':
-      if (tetronimo.moveRight()) {
-        moveSound.play();
-      }
-      break;
-    case 'ArrowDown':
-      if (!tetronimo.isFrozen && !tetronimo.moveDown()) {
-        freezeCheckRowsNewTet();
-      }
-      break;
-    case 'z':
-      if (tetronimo.rotateCCW()) {
-        rotateSound.play();
-      }
-      break;
-    case 'x':
-      if (tetronimo.rotateCW()) {
-        rotateSound.play();
-      }
-      break;
+  const key = ev.key;
+  Keyboard.setKeyDown(key);
+
+  if (key === 'p') {
+    paused = !paused;
+    if (paused) {
+      clearInterval(dropInterval);
+      Keyboard.stopKeypressInterval();
+    } else {
+      startDropInterval();
+      Keyboard.startKeypressInterval();
+    }
   }
-})
+});
+
+// On Keyup
+document.body.addEventListener('keyup', (ev) => {
+  const key = ev.key;
+  Keyboard.setKeyUp(key);
+});
