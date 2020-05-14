@@ -1,4 +1,5 @@
 import Grid from './grid.js';
+import Stats from './stats.js';
 import Keyboard from './keyboard.js';
 import { create_HTML_Grid, getRandomTet } from './utils.js';
 
@@ -35,14 +36,15 @@ Keyboard.assignHandler('x', () => {
   if (tetronimo.rotateCW()) {
     rotateSound.play();
   }
-});
+}, 250);
 
 Keyboard.assignHandler('z', () => {
   if (tetronimo.rotateCCW()) {
     rotateSound.play();
   }
-});
+}, 250);
 
+// Initialize and Start game
 create_HTML_Grid();
 new Grid();
 startGame();
@@ -68,8 +70,9 @@ function freezeCheckRowsNewTet() {
   landSound.play();
   tetronimo.freeze();
   clearInterval(dropInterval);
-  const completedRowCount = Grid.removeCompletedRows();
-  const timeOut = (completedRowCount === 0) ? 200 : 500;
+  const completedLineCount = Grid.removeCompletedLines();
+  Stats.updateStats(completedLineCount);
+  const timeOut = (completedLineCount === 0) ? 200 : 500;
   setTimeout(() => {
     tetronimo = getRandomTet();
     startDropInterval();

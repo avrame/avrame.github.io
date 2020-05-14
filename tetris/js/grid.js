@@ -14,7 +14,7 @@ export default class Grid {
     }
   }
 
-  static removeCompletedRows() {
+  static removeCompletedLines() {
     let rowCount = 0;
     for (let y = 0; y < Grid.HEIGHT; y++) {
       if (Grid.squares[y].every(sq => !!sq)) {
