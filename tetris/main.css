@@ -1,14 +1,27 @@
+@font-face {
+  font-family: "arcade";
+  src: url("fonts/ARCADE.TTF");
+}
+
+html {
+  font-family: "arcade", serif;
+}
+
+.wrapper {
+  width: 249px;
+  margin: 0 auto;
+  position: relative;
+}
 #game_area {
   display: grid;
   grid-template-columns: repeat(10, 24px);
   grid-template-rows: repeat(18, 24px);
   column-gap: 1px;
   row-gap: 1px;
-  width: calc(10 * 25px - 1px);
-  margin: 0 auto;
+  width: 249px; /*calc(10 * 25px - 1px);*/
 }
 #game_area b {
-  background-color: #EEE;
+  background-color: #eee;
   border-radius: 2px;
 }
 
@@ -32,6 +45,27 @@
 }
 
 #game_area .fade {
-  background-color: #EEE;
-  transition: background-color .5s linear;
+  background-color: #eee;
+  transition: background-color 0.5s linear;
+}
+
+#stats {
+  font-size: 36px;
+  position: absolute;
+  top: 0;
+  left: calc(100% + 20px);
+  width: 200px;
+}
+#stats dt {
+  float: left;
+  clear: left;
+  text-align: right;
+  width: 7rem;
+  margin-right: 0.5rem;
+}
+#stats dd {
+  float: left;
+  clear: right;
+  text-align: left;
+  margin: 0;
 }

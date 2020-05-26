@@ -1,6 +1,6 @@
-let levelEl = document.getElementById('level');
-let linesEl = document.getElementById('lines');
-let scoreEl = document.getElementById('score');
+let levelEl = document.getElementById("level");
+let linesEl = document.getElementById("lines");
+let scoreEl = document.getElementById("score");
 
 export default class Stats {
   static lines = 0;
@@ -19,7 +19,7 @@ export default class Stats {
   }
 
   static calculateLevel() {
-    Stats.level = Math.floor(Stats.lines / 10) + 1;
+    Stats.level = Math.min(Math.floor(Stats.lines / 10) + 1, 20);
     levelEl.innerText = Stats.level;
   }
 

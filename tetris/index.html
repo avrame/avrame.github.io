@@ -1,26 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Tetris</title>
-    <meta name="description" content="Tetris in JavaScript">
+    <meta name="description" content="Tetris in JavaScript" />
     <link rel="stylesheet" href="main.css" />
     <script type="module" type="text/javascript" src="js/utils.js"></script>
     <script type="module" type="text/javascript" src="js/stats.js"></script>
     <script type="module" type="text/javascript" src="js/keyboard.js"></script>
-    <script type="module" type="text/javascript" src="js/tetronimos.js"></script>
+    <script
+      type="module"
+      type="text/javascript"
+      src="js/tetronimos.js"
+    ></script>
     <script type="module" type="text/javascript" src="js/main.js"></script>
   </head>
   <body>
     <main>
-      <div id="game_area"></div>
-      <aside id="stats">
-        <dl>
-          <dt>Level:</dt> <dd id="level">1</dd>
-          <dt>Lines Cleared:</dt> <dd id="lines">0</dd>
-          <dt>Score:</dt> <dd id="score">0</dd>
-        </dl>
-      </aside>
+      <div class="wrapper">
+        <div id="game_area"></div>
+        <aside id="stats">
+          <dl>
+            <dt>Level:</dt>
+            <dd id="level">1</dd>
+            <dt>Lines:</dt>
+            <dd id="lines">0</dd>
+            <dt>Score:</dt>
+            <dd id="score">0</dd>
+          </dl>
+        </aside>
+      </div>
     </main>
     <audio id="move_sound" src="sounds/move.mp3"></audio>
     <audio id="rotate_sound" src="sounds/rotate.mp3"></audio>
