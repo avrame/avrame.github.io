@@ -74,6 +74,30 @@ html {
   margin: 0;
 }
 
+#controls {
+  width: 121px;
+  margin: 0 auto;
+}
+#controls h2 {
+  text-align: center;
+}
+#controls dl {
+  margin: 0;
+}
+#controls dt {
+  text-align: right;
+  float: left;
+  clear: left;
+  width: 3rem;
+  margin-bottom: 0.5rem;
+}
+#controls dd {
+  text-align: left;
+  float: left;
+  clear: right;
+  margin-left: 0.5rem;
+}
+
 #game_over_modal {
   background: #ddd;
   padding: 1rem;
