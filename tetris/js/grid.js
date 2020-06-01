@@ -1,23 +1,25 @@
-import { paintSquare, fadeSquare, clearSquare } from './utils.js';
+import { paintSquare, fadeSquare, clearSquare } from "./utils.js";
 
-const lineSound = document.getElementById('line_sound');
-const tetrisSound = document.getElementById('tetris_sound');
+const lineSound = document.getElementById("line_sound");
+const tetrisSound = document.getElementById("tetris_sound");
 
 export default class Grid {
-  static squares = [];
+  static squares;
   static WIDTH = 10;
   static HEIGHT = 18;
 
   constructor() {
+    Grid.squares = [];
     for (let y = 0; y < Grid.HEIGHT; y++) {
       Grid.squares.push(new Array(Grid.WIDTH).fill(null));
     }
+    Grid.render();
   }
 
   static removeCompletedLines() {
     let rowCount = 0;
     for (let y = 0; y < Grid.HEIGHT; y++) {
-      if (Grid.squares[y].every(sq => !!sq)) {
+      if (Grid.squares[y].every((sq) => !!sq)) {
         rowCount++;
         this.fadeRow(y);
         setTimeout(() => this.clearRow(y), 500);
@@ -40,7 +42,7 @@ export default class Grid {
       fadeSquare(y, x);
     }
   }
-  
+
   static clearRow(y) {
     for (let x = 0; x < Grid.WIDTH; x++) {
       Grid.squares[y][x] = null;

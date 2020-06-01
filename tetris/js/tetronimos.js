@@ -1,5 +1,5 @@
-import Grid from './grid.js';
-import { paintSquare, clearSquare } from './utils.js';
+import Grid from "./grid.js";
+import { paintSquare, clearSquare } from "./utils.js";
 
 class Tetronimo {
   frozen = false;
@@ -16,7 +16,7 @@ class Tetronimo {
     this.clear();
     this.x -= 1;
     this.render();
-    return true
+    return true;
   }
 
   moveRight() {
@@ -24,7 +24,7 @@ class Tetronimo {
     this.clear();
     this.x += 1;
     this.render();
-    return true
+    return true;
   }
 
   moveDown() {
@@ -37,7 +37,7 @@ class Tetronimo {
 
   quickDrop() {
     this.clear();
-    while(!this.cantMove(this.y + 1, this.x, this.rotation)) {
+    while (!this.cantMove(this.y + 1, this.x, this.rotation)) {
       this.y += 1;
     }
     this.render();
@@ -56,7 +56,7 @@ class Tetronimo {
     this.render();
     return true;
   }
-  
+
   rotateCCW() {
     let rotation = this.rotation;
     if (rotation === 0) {
@@ -71,14 +71,19 @@ class Tetronimo {
     return true;
   }
 
-  cantMove(newY, newX, rotation) {
+  cantMove(newY = this.y, newX = this.x, rotation = this.rotation) {
     const shape = this.orientations[rotation];
     for (let y = 0; y < shape.length; y++) {
       for (let x = 0; x < shape[0].length; x++) {
         if (shape[y][x] === 1) {
           const testY = newY + y;
           const testX = newX + x;
-          if (testX < 0 || testX > Grid.WIDTH - 1 || testY > Grid.HEIGHT - 1 || Grid.squares[testY][testX]) {
+          if (
+            testX < 0 ||
+            testX > Grid.WIDTH - 1 ||
+            testY > Grid.HEIGHT - 1 ||
+            Grid.squares[testY][testX]
+          ) {
             return true;
           }
         }
@@ -123,17 +128,17 @@ class Tetronimo {
 }
 
 export class S_Type extends Tetronimo {
-  color = 'p';
+  color = "p";
   orientations = [
     [
-      [1,0],
-      [1,1],
-      [0,1],
+      [1, 0],
+      [1, 1],
+      [0, 1],
     ],
     [
-      [0,0,0],
-      [0,1,1],
-      [1,1,0],
+      [0, 0, 0],
+      [0, 1, 1],
+      [1, 1, 0],
     ],
   ];
 
@@ -144,17 +149,17 @@ export class S_Type extends Tetronimo {
 }
 
 export class Z_Type extends Tetronimo {
-  color = 'y';
+  color = "y";
   orientations = [
     [
-      [0,1],
-      [1,1],
-      [1,0],
+      [0, 1],
+      [1, 1],
+      [1, 0],
     ],
     [
-      [0,0,0],
-      [1,1,0],
-      [0,1,1],
+      [0, 0, 0],
+      [1, 1, 0],
+      [0, 1, 1],
     ],
   ];
 
@@ -165,27 +170,27 @@ export class Z_Type extends Tetronimo {
 }
 
 export class T_Type extends Tetronimo {
-  color = 'g';
+  color = "g";
   orientations = [
     [
-      [0,1,0],
-      [1,1,1],
+      [0, 1, 0],
+      [1, 1, 1],
     ],
     [
-      [0,1,0],
-      [0,1,1],
-      [0,1,0],
+      [0, 1, 0],
+      [0, 1, 1],
+      [0, 1, 0],
     ],
     [
-      [0,0,0],
-      [1,1,1],
-      [0,1,0],
+      [0, 0, 0],
+      [1, 1, 1],
+      [0, 1, 0],
     ],
     [
-      [0,1],
-      [1,1],
-      [0,1],
-    ]
+      [0, 1],
+      [1, 1],
+      [0, 1],
+    ],
   ];
 
   constructor() {
@@ -195,28 +200,28 @@ export class T_Type extends Tetronimo {
 }
 
 export class L_Type extends Tetronimo {
-  color = 'o';
+  color = "o";
   x = 3;
   orientations = [
     [
-      [0,1,0],
-      [0,1,0],
-      [0,1,1],
+      [0, 1, 0],
+      [0, 1, 0],
+      [0, 1, 1],
     ],
     [
-      [0,0,0],
-      [1,1,1],
-      [1,0,0],
+      [0, 0, 0],
+      [1, 1, 1],
+      [1, 0, 0],
     ],
     [
-      [1,1],
-      [0,1],
-      [0,1],
+      [1, 1],
+      [0, 1],
+      [0, 1],
     ],
     [
-      [0,0,1],
-      [1,1,1],
-    ]
+      [0, 0, 1],
+      [1, 1, 1],
+    ],
   ];
 
   constructor() {
@@ -226,27 +231,27 @@ export class L_Type extends Tetronimo {
 }
 
 export class RL_Type extends Tetronimo {
-  color = 'r';
+  color = "r";
   orientations = [
     [
-      [0,1],
-      [0,1],
-      [1,1],
+      [0, 1],
+      [0, 1],
+      [1, 1],
     ],
     [
-      [1,0,0],
-      [1,1,1],
+      [1, 0, 0],
+      [1, 1, 1],
     ],
     [
-      [0,1,1],
-      [0,1,0],
-      [0,1,0],
+      [0, 1, 1],
+      [0, 1, 0],
+      [0, 1, 0],
     ],
     [
-      [0,0,0],
-      [1,1,1],
-      [0,0,1],
-    ]
+      [0, 0, 0],
+      [1, 1, 1],
+      [0, 0, 1],
+    ],
   ];
 
   constructor() {
@@ -256,18 +261,18 @@ export class RL_Type extends Tetronimo {
 }
 
 export class I_Type extends Tetronimo {
-  color = 'b';
+  color = "b";
   x = 3;
   orientations = [
     [
-      [0,1],
-      [0,1],
-      [0,1],
-      [0,1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
     ],
     [
-      [0,0,0,0],
-      [1,1,1,1],
+      [0, 0, 0, 0],
+      [1, 1, 1, 1],
     ],
   ];
 

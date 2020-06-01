@@ -8,27 +8,36 @@ let dropSpeed = INITIAL_DROP_SPEED;
 let dropInterval;
 let tetronimo;
 let paused = false;
+let clearingRows = false;
+let gameIsOver = false;
 
 // Get audio elements
 const moveSound = document.getElementById("move_sound");
 const rotateSound = document.getElementById("rotate_sound");
 const landSound = document.getElementById("land_sound");
 
+// Game over modal
+const gameOverModal = document.getElementById("game_over_modal");
+
+// New game button
+const newGameBtn = document.getElementById("new_game_btn");
+newGameBtn.addEventListener("click", startGame);
+
 // Assign key handlers
 Keyboard.assignHandler("ArrowDown", () => {
-  if (!tetronimo.isFrozen && !tetronimo.moveDown()) {
+  if (!gameIsOver && !tetronimo.isFrozen && !tetronimo.moveDown()) {
     freezeCheckRowsNewTet();
   }
 });
 
 Keyboard.assignHandler("ArrowLeft", () => {
-  if (tetronimo.moveLeft()) {
+  if (!gameIsOver && tetronimo.moveLeft()) {
     moveSound.play();
   }
 });
 
 Keyboard.assignHandler("ArrowRight", () => {
-  if (tetronimo.moveRight()) {
+  if (!gameIsOver && tetronimo.moveRight()) {
     moveSound.play();
   }
 });
@@ -36,7 +45,7 @@ Keyboard.assignHandler("ArrowRight", () => {
 Keyboard.assignHandler(
   "x",
   () => {
-    if (tetronimo.rotateCW()) {
+    if (!gameIsOver && tetronimo.rotateCW()) {
       rotateSound.play();
     }
   },
@@ -46,7 +55,7 @@ Keyboard.assignHandler(
 Keyboard.assignHandler(
   "z",
   () => {
-    if (tetronimo.rotateCCW()) {
+    if (!gameIsOver && tetronimo.rotateCCW()) {
       rotateSound.play();
     }
   },
@@ -55,10 +64,12 @@ Keyboard.assignHandler(
 
 // Initialize and Start game
 create_HTML_Grid();
-new Grid();
 startGame();
 
 function startGame() {
+  gameIsOver = false;
+  gameOverModal.classList.add("hidden");
+  new Grid();
   tetronimo = getRandomTet();
   setDropSpeed();
   startDropInterval();
@@ -77,6 +88,7 @@ function startDropInterval() {
 }
 
 function freezeCheckRowsNewTet() {
+  clearingRows = true;
   landSound.play();
   tetronimo.freeze();
   clearInterval(dropInterval);
@@ -88,7 +100,12 @@ function freezeCheckRowsNewTet() {
     const timeOut = completedLineCount === 0 ? 200 : 500;
     setTimeout(() => {
       tetronimo = getRandomTet();
-      startDropInterval();
+      if (tetronimo.cantMove()) {
+        gameOver();
+      } else {
+        startDropInterval();
+      }
+      clearingRows = false;
     }, timeOut);
   }, 500);
 }
@@ -96,6 +113,16 @@ function freezeCheckRowsNewTet() {
 function setDropSpeed() {
   const newSpeed = INITIAL_DROP_SPEED - (Stats.level - 1) * 50;
   dropSpeed = Math.max(newSpeed, 50);
+}
+
+function gameOver() {
+  gameIsOver = true;
+  clearInterval(dropInterval);
+  showGameOverModal();
+}
+
+function showGameOverModal() {
+  gameOverModal.classList.remove("hidden");
 }
 
 // On Keydown
@@ -117,8 +144,10 @@ document.body.addEventListener("keydown", (ev) => {
 
   // If spacebar
   if (key === " ") {
-    tetronimo.quickDrop();
-    freezeCheckRowsNewTet();
+    if (!clearingRows && !gameIsOver) {
+      tetronimo.quickDrop();
+      freezeCheckRowsNewTet();
+    }
   }
 });
 

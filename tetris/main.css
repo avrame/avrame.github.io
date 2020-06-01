@@ -7,6 +7,10 @@ html {
   font-family: "arcade", serif;
 }
 
+.hidden {
+  display: none;
+}
+
 .wrapper {
   width: 249px;
   margin: 0 auto;
@@ -54,7 +58,7 @@ html {
   position: absolute;
   top: 0;
   left: calc(100% + 20px);
-  width: 200px;
+  width: 300px;
 }
 #stats dt {
   float: left;
@@ -68,4 +72,17 @@ html {
   clear: right;
   text-align: left;
   margin: 0;
+}
+
+#game_over_modal {
+  background: #ddd;
+  padding: 1rem;
+  width: 280px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 170px;
+  transform: translate(-50%);
+  border: 3px solid #888;
+  border-radius: 8px;
 }
