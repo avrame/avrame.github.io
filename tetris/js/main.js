@@ -80,15 +80,17 @@ function freezeCheckRowsNewTet() {
   landSound.play();
   tetronimo.freeze();
   clearInterval(dropInterval);
-  const completedLineCount = Grid.removeCompletedLines();
-  Stats.updateStats(completedLineCount);
-  // Set drop interval based on level
-  setDropSpeed();
-  const timeOut = completedLineCount === 0 ? 200 : 500;
   setTimeout(() => {
-    tetronimo = getRandomTet();
-    startDropInterval();
-  }, timeOut);
+    const completedLineCount = Grid.removeCompletedLines();
+    Stats.updateStats(completedLineCount);
+    // Set drop interval based on level
+    setDropSpeed();
+    const timeOut = completedLineCount === 0 ? 200 : 500;
+    setTimeout(() => {
+      tetronimo = getRandomTet();
+      startDropInterval();
+    }, timeOut);
+  }, 500);
 }
 
 function setDropSpeed() {
