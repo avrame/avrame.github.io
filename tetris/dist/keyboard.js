@@ -21,7 +21,7 @@ let Keyboard = (() => {
                         }
                     }
                 });
-            }, 25);
+            }, 20);
         }
         static stopKeypressInterval() {
             clearInterval(Keyboard.keypressInterval);

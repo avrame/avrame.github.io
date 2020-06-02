@@ -1,6 +1,7 @@
-let levelEl = document.getElementById("level");
-let linesEl = document.getElementById("lines");
-let scoreEl = document.getElementById("score");
+const levelEl = document.getElementById("level");
+const linesEl = document.getElementById("lines");
+const scoreEl = document.getElementById("score");
+const levelSound = <HTMLAudioElement>document.getElementById("level_sound");
 
 export default class Stats {
   static lines = 0;
@@ -19,8 +20,12 @@ export default class Stats {
   }
 
   static calculateLevel() {
-    Stats.level = Math.min(Math.floor(Stats.lines / 10) + 1, 20);
-    levelEl.innerText = Stats.level.toString();
+    const newLevel = Math.min(Math.floor(Stats.lines / 10) + 1, 20);
+    if (newLevel !== Stats.level) {
+      Stats.level = newLevel;
+      levelSound.play();
+      levelEl.innerText = Stats.level.toString();
+    }
   }
 
   static increaseScore(removedLinesCount) {

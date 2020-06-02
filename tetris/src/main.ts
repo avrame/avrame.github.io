@@ -23,6 +23,10 @@ let gameIsOver = false;
 const moveSound = <HTMLAudioElement>document.getElementById("move_sound");
 const rotateSound = <HTMLAudioElement>document.getElementById("rotate_sound");
 const landSound = <HTMLAudioElement>document.getElementById("land_sound");
+const pauseSound = <HTMLAudioElement>document.getElementById("pause_sound");
+const gameOverSound = <HTMLAudioElement>(
+  document.getElementById("game_over_sound")
+);
 
 // Game over modal
 const gameOverModal = document.getElementById("game_over_modal");
@@ -124,6 +128,7 @@ function setDropSpeed() {
 
 function gameOver() {
   gameIsOver = true;
+  gameOverSound.play();
   clearInterval(dropInterval);
   showGameOverModal();
 }
@@ -158,6 +163,7 @@ document.body.addEventListener("keydown", (ev) => {
 
   if (key === "p") {
     paused = !paused;
+    pauseSound.play();
     if (paused) {
       clearInterval(dropInterval);
       Keyboard.stopKeypressInterval();

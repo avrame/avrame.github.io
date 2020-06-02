@@ -24,7 +24,7 @@ export default class Keyboard {
           }
         }
       });
-    }, 25); // 40 times a second
+    }, 20); // 50 times a second
   }
 
   static stopKeypressInterval() {
