@@ -1,10 +1,11 @@
-import Grid from "./grid.js";
+import Grid, { LINE_DROP_DELAY } from "./grid.js";
 import Stats from "./stats.js";
 import Keyboard from "./keyboard.js";
-import { create_HTML_Grid, getRandomTet } from "./utils.js";
+import { S_Type, Z_Type, T_Type, L_Type, RL_Type, I_Type, } from "./tetronimos.js";
 const INITIAL_DROP_SPEED = 1050;
 let dropSpeed = INITIAL_DROP_SPEED;
 let dropInterval;
+let grid;
 let tetronimo;
 let paused = false;
 let clearingRows = false;
@@ -40,12 +41,11 @@ Keyboard.assignHandler("z", () => {
         rotateSound.play();
     }
 }, 250);
-create_HTML_Grid();
 startGame();
 function startGame() {
     gameIsOver = false;
     gameOverModal.classList.add("hidden");
-    new Grid();
+    grid = new Grid();
     tetronimo = getRandomTet();
     setDropSpeed();
     startDropInterval();
@@ -67,10 +67,10 @@ function freezeCheckRowsNewTet() {
     tetronimo.freeze();
     clearInterval(dropInterval);
     setTimeout(() => {
-        const completedLineCount = Grid.removeCompletedLines();
+        const completedLineCount = grid.removeCompletedLines();
         Stats.updateStats(completedLineCount);
         setDropSpeed();
-        const timeOut = completedLineCount === 0 ? 200 : 500;
+        const timeOut = completedLineCount === 0 ? 200 : LINE_DROP_DELAY;
         setTimeout(() => {
             tetronimo = getRandomTet();
             if (tetronimo.cantMove()) {
@@ -81,7 +81,7 @@ function freezeCheckRowsNewTet() {
             }
             clearingRows = false;
         }, timeOut);
-    }, 500);
+    }, LINE_DROP_DELAY);
 }
 function setDropSpeed() {
     const newSpeed = INITIAL_DROP_SPEED - (Stats.level - 1) * 50;
@@ -94,6 +94,23 @@ function gameOver() {
 }
 function showGameOverModal() {
     gameOverModal.classList.remove("hidden");
+}
+function getRandomTet() {
+    const randInt = Math.floor(Math.random() * 6);
+    switch (randInt) {
+        case 0:
+            return new S_Type(grid);
+        case 1:
+            return new Z_Type(grid);
+        case 2:
+            return new T_Type(grid);
+        case 3:
+            return new L_Type(grid);
+        case 4:
+            return new RL_Type(grid);
+        case 5:
+            return new I_Type(grid);
+    }
 }
 document.body.addEventListener("keydown", (ev) => {
     const key = ev.key;

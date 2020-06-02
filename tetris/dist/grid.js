@@ -1,19 +1,20 @@
-import { paintSquare, fadeSquare, clearSquare } from "./utils.js";
 const lineSound = document.getElementById("line_sound");
 const tetrisSound = document.getElementById("tetris_sound");
+export const LINE_DROP_DELAY = 650;
 let Grid = (() => {
     class Grid {
         constructor() {
-            Grid.squares = [];
-            for (let y = 0; y < Grid.HEIGHT; y++) {
-                Grid.squares.push(new Array(Grid.WIDTH).fill(null));
+            this.squares = [];
+            this.create_HTML_Grid();
+            for (let y = 0; y < Grid.height; y++) {
+                this.squares.push(new Array(Grid.width).fill(null));
             }
-            Grid.render();
+            this.render();
         }
-        static removeCompletedLines() {
+        removeCompletedLines() {
             let rowCount = 0;
-            for (let y = 0; y < Grid.HEIGHT; y++) {
-                if (Grid.squares[y].every((sq) => !!sq)) {
+            for (let y = 0; y < Grid.height; y++) {
+                if (this.squares[y].every((sq) => !!sq)) {
                     rowCount++;
                     this.fadeRow(y);
                     setTimeout(() => this.clearRow(y), 500);
@@ -26,41 +27,69 @@ let Grid = (() => {
                 else {
                     lineSound.play();
                 }
-                setTimeout(Grid.render, 500);
+                setTimeout(() => this.render(), LINE_DROP_DELAY);
             }
             return rowCount;
         }
-        static fadeRow(y) {
-            for (let x = 0; x < Grid.WIDTH; x++) {
-                fadeSquare(y, x);
-            }
+        getSquareColor(y, x) {
+            return this.squares[y][x];
         }
-        static clearRow(y) {
-            for (let x = 0; x < Grid.WIDTH; x++) {
-                Grid.squares[y][x] = null;
-                clearSquare(y, x);
-            }
-            for (let row = y - 1; row >= 0; row--) {
-                for (let x = 0; x < Grid.WIDTH; x++) {
-                    Grid.squares[row + 1][x] = Grid.squares[row][x];
+        setSquareColor(y, x, color) {
+            this.squares[y][x] = color;
+        }
+        create_HTML_Grid() {
+            const ga = document.getElementById("game_area");
+            for (let y = 0; y < Grid.height; y++) {
+                for (let x = 0; x < Grid.width; x++) {
+                    const b = document.createElement("b");
+                    b.id = `s_${x}_${y}`;
+                    ga.appendChild(b);
                 }
             }
         }
-        static render() {
-            for (let y = 0; y < Grid.HEIGHT; y++) {
-                for (let x = 0; x < Grid.WIDTH; x++) {
-                    if (Grid.squares[y][x]) {
-                        paintSquare(y, x, Grid.squares[y][x]);
+        paintSquare(y, x, color) {
+            const el = document.getElementById(`s_${x}_${y}`);
+            el.classList.add(color);
+        }
+        clearSquare(y, x) {
+            const el = document.getElementById(`s_${x}_${y}`);
+            el.className = "";
+        }
+        fadeSquare(y, x) {
+            const el = document.getElementById(`s_${x}_${y}`);
+            el.classList.add("fade");
+        }
+        fadeRow(y) {
+            for (let x = 0; x < Grid.width; x++) {
+                this.fadeSquare(y, x);
+            }
+        }
+        clearRow(y) {
+            for (let x = 0; x < Grid.width; x++) {
+                this.squares[y][x] = null;
+                this.clearSquare(y, x);
+            }
+            for (let row = y - 1; row >= 0; row--) {
+                for (let x = 0; x < Grid.width; x++) {
+                    this.squares[row + 1][x] = this.squares[row][x];
+                }
+            }
+        }
+        render() {
+            for (let y = 0; y < Grid.height; y++) {
+                for (let x = 0; x < Grid.width; x++) {
+                    if (this.squares[y][x]) {
+                        this.paintSquare(y, x, this.squares[y][x]);
                     }
                     else {
-                        clearSquare(y, x);
+                        this.clearSquare(y, x);
                     }
                 }
             }
         }
     }
-    Grid.WIDTH = 10;
-    Grid.HEIGHT = 18;
+    Grid.width = 10;
+    Grid.height = 18;
     return Grid;
 })();
 export default Grid;

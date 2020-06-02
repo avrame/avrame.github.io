@@ -1,13 +1,17 @@
 import Grid from "./grid.js";
-import { paintSquare, clearSquare } from "./utils.js";
 
 class Tetronimo {
-  frozen = false;
-  x = 4;
-  y = 1;
-  rotation = 0;
-  orientations = [];
-  color;
+  private grid: Grid;
+  private frozen: boolean = false;
+  private rotation: number = 0;
+  protected x: number = 4;
+  protected y: number = 1;
+  protected orientations: Array<Array<number[]>> = [];
+  protected color: string;
+
+  constructor(grid: Grid) {
+    this.grid = grid;
+  }
 
   get isFrozen() {
     return this.frozen;
@@ -82,9 +86,9 @@ class Tetronimo {
           const testX = newX + x;
           if (
             testX < 0 ||
-            testX > Grid.WIDTH - 1 ||
-            testY > Grid.HEIGHT - 1 ||
-            Grid.squares[testY][testX]
+            testX > Grid.width - 1 ||
+            testY > Grid.height - 1 ||
+            this.grid.getSquareColor(testY, testX)
           ) {
             return true;
           }
@@ -99,7 +103,7 @@ class Tetronimo {
     for (let y = 0; y < shape.length; y++) {
       for (let x = 0; x < shape[0].length; x++) {
         if (shape[y][x] === 1) {
-          clearSquare(this.y + y, this.x + x);
+          this.grid.clearSquare(this.y + y, this.x + x);
         }
       }
     }
@@ -110,7 +114,7 @@ class Tetronimo {
     for (let y = 0; y < shape.length; y++) {
       for (let x = 0; x < shape[0].length; x++) {
         if (shape[y][x] === 1) {
-          paintSquare(this.y + y, this.x + x, this.color);
+          this.grid.paintSquare(this.y + y, this.x + x, this.color);
         }
       }
     }
@@ -122,7 +126,7 @@ class Tetronimo {
     for (let y = 0; y < shape.length; y++) {
       for (let x = 0; x < shape[0].length; x++) {
         if (shape[y][x] === 1) {
-          Grid.squares[this.y + y][this.x + x] = this.color;
+          this.grid.setSquareColor(this.y + y, this.x + x, this.color);
         }
       }
     }
@@ -144,8 +148,8 @@ export class S_Type extends Tetronimo {
     ],
   ];
 
-  constructor() {
-    super();
+  constructor(grid) {
+    super(grid);
     this.render();
   }
 }
@@ -165,8 +169,8 @@ export class Z_Type extends Tetronimo {
     ],
   ];
 
-  constructor() {
-    super();
+  constructor(grid) {
+    super(grid);
     this.render();
   }
 }
@@ -195,8 +199,8 @@ export class T_Type extends Tetronimo {
     ],
   ];
 
-  constructor() {
-    super();
+  constructor(grid) {
+    super(grid);
     this.render();
   }
 }
@@ -226,8 +230,8 @@ export class L_Type extends Tetronimo {
     ],
   ];
 
-  constructor() {
-    super();
+  constructor(grid) {
+    super(grid);
     this.render();
   }
 }
@@ -256,8 +260,8 @@ export class RL_Type extends Tetronimo {
     ],
   ];
 
-  constructor() {
-    super();
+  constructor(grid) {
+    super(grid);
     this.render();
   }
 }
@@ -278,8 +282,8 @@ export class I_Type extends Tetronimo {
     ],
   ];
 
-  constructor() {
-    super();
+  constructor(grid) {
+    super(grid);
     this.render();
   }
 }
