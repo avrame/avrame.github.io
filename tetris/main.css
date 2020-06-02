@@ -101,7 +101,7 @@ html {
 #game_over_modal {
   background: #ddd;
   padding: 1rem;
-  width: 280px;
+  width: 260px;
   margin: 0 auto;
   position: absolute;
   left: 50%;
@@ -109,4 +109,13 @@ html {
   transform: translate(-50%);
   border: 3px solid #888;
   border-radius: 8px;
+}
+#game_over_modal h2 {
+  text-align: center;
+  margin: 0 0 1rem;
+}
+#game_over_modal button {
+  display: block;
+  width: 90px;
+  margin: 0 auto;
 }

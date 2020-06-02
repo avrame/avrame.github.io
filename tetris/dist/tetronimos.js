@@ -4,7 +4,7 @@ class Tetronimo {
         this.frozen = false;
         this.rotation = 0;
         this.x = 4;
-        this.y = 1;
+        this.y = 0;
         this.orientations = [];
         this.grid = grid;
     }
@@ -128,14 +128,13 @@ export class S_Type extends Tetronimo {
         this.color = "p";
         this.orientations = [
             [
+                [0, 1, 1],
+                [1, 1, 0],
+            ],
+            [
                 [1, 0],
                 [1, 1],
                 [0, 1],
-            ],
-            [
-                [0, 0, 0],
-                [0, 1, 1],
-                [1, 1, 0],
             ],
         ];
         this.render();
@@ -147,14 +146,13 @@ export class Z_Type extends Tetronimo {
         this.color = "y";
         this.orientations = [
             [
+                [1, 1, 0],
+                [0, 1, 1],
+            ],
+            [
                 [0, 1],
                 [1, 1],
                 [1, 0],
-            ],
-            [
-                [0, 0, 0],
-                [1, 1, 0],
-                [0, 1, 1],
             ],
         ];
         this.render();
@@ -195,6 +193,10 @@ export class L_Type extends Tetronimo {
         this.x = 3;
         this.orientations = [
             [
+                [0, 0, 1],
+                [1, 1, 1],
+            ],
+            [
                 [0, 1, 0],
                 [0, 1, 0],
                 [0, 1, 1],
@@ -208,10 +210,6 @@ export class L_Type extends Tetronimo {
                 [1, 1],
                 [0, 1],
                 [0, 1],
-            ],
-            [
-                [0, 0, 1],
-                [1, 1, 1],
             ],
         ];
         this.render();
@@ -223,11 +221,6 @@ export class RL_Type extends Tetronimo {
         this.color = "r";
         this.orientations = [
             [
-                [0, 1],
-                [0, 1],
-                [1, 1],
-            ],
-            [
                 [1, 0, 0],
                 [1, 1, 1],
             ],
@@ -241,6 +234,11 @@ export class RL_Type extends Tetronimo {
                 [1, 1, 1],
                 [0, 0, 1],
             ],
+            [
+                [0, 1],
+                [0, 1],
+                [1, 1],
+            ],
         ];
         this.render();
     }
@@ -251,15 +249,12 @@ export class I_Type extends Tetronimo {
         this.color = "b";
         this.x = 3;
         this.orientations = [
+            [[1, 1, 1, 1]],
             [
                 [0, 1],
                 [0, 1],
                 [0, 1],
                 [0, 1],
-            ],
-            [
-                [0, 0, 0, 0],
-                [1, 1, 1, 1],
             ],
         ];
         this.render();

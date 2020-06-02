@@ -5,7 +5,7 @@ class Tetronimo {
   private frozen: boolean = false;
   private rotation: number = 0;
   protected x: number = 4;
-  protected y: number = 1;
+  protected y: number = 0;
   protected orientations: Array<Array<number[]>> = [];
   protected color: string;
 
@@ -137,14 +137,13 @@ export class S_Type extends Tetronimo {
   color = "p";
   orientations = [
     [
+      [0, 1, 1],
+      [1, 1, 0],
+    ],
+    [
       [1, 0],
       [1, 1],
       [0, 1],
-    ],
-    [
-      [0, 0, 0],
-      [0, 1, 1],
-      [1, 1, 0],
     ],
   ];
 
@@ -158,14 +157,13 @@ export class Z_Type extends Tetronimo {
   color = "y";
   orientations = [
     [
+      [1, 1, 0],
+      [0, 1, 1],
+    ],
+    [
       [0, 1],
       [1, 1],
       [1, 0],
-    ],
-    [
-      [0, 0, 0],
-      [1, 1, 0],
-      [0, 1, 1],
     ],
   ];
 
@@ -210,6 +208,10 @@ export class L_Type extends Tetronimo {
   x = 3;
   orientations = [
     [
+      [0, 0, 1],
+      [1, 1, 1],
+    ],
+    [
       [0, 1, 0],
       [0, 1, 0],
       [0, 1, 1],
@@ -223,10 +225,6 @@ export class L_Type extends Tetronimo {
       [1, 1],
       [0, 1],
       [0, 1],
-    ],
-    [
-      [0, 0, 1],
-      [1, 1, 1],
     ],
   ];
 
@@ -240,11 +238,6 @@ export class RL_Type extends Tetronimo {
   color = "r";
   orientations = [
     [
-      [0, 1],
-      [0, 1],
-      [1, 1],
-    ],
-    [
       [1, 0, 0],
       [1, 1, 1],
     ],
@@ -258,6 +251,11 @@ export class RL_Type extends Tetronimo {
       [1, 1, 1],
       [0, 0, 1],
     ],
+    [
+      [0, 1],
+      [0, 1],
+      [1, 1],
+    ],
   ];
 
   constructor(grid) {
@@ -270,15 +268,12 @@ export class I_Type extends Tetronimo {
   color = "b";
   x = 3;
   orientations = [
+    [[1, 1, 1, 1]],
     [
       [0, 1],
       [0, 1],
       [0, 1],
       [0, 1],
-    ],
-    [
-      [0, 0, 0, 0],
-      [1, 1, 1, 1],
     ],
   ];
 
