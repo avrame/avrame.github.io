@@ -12,9 +12,9 @@ let clearingRows = false;
 let gameIsOver = false;
 
 // Get audio elements
-const moveSound = document.getElementById("move_sound");
-const rotateSound = document.getElementById("rotate_sound");
-const landSound = document.getElementById("land_sound");
+const moveSound = <HTMLAudioElement>document.getElementById("move_sound");
+const rotateSound = <HTMLAudioElement>document.getElementById("rotate_sound");
+const landSound = <HTMLAudioElement>document.getElementById("land_sound");
 
 // Game over modal
 const gameOverModal = document.getElementById("game_over_modal");

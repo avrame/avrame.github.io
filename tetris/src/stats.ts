@@ -15,12 +15,12 @@ export default class Stats {
 
   static increaseLines(linesCount) {
     Stats.lines += linesCount;
-    linesEl.innerText = Stats.lines;
+    linesEl.innerText = Stats.lines.toString();
   }
 
   static calculateLevel() {
     Stats.level = Math.min(Math.floor(Stats.lines / 10) + 1, 20);
-    levelEl.innerText = Stats.level;
+    levelEl.innerText = Stats.level.toString();
   }
 
   static increaseScore(removedLinesCount) {
@@ -43,6 +43,6 @@ export default class Stats {
     }
 
     Stats.score += Stats.level * multiplier;
-    scoreEl.innerText = Stats.score;
+    scoreEl.innerText = Stats.score.toString();
   }
 }

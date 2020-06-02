@@ -1,19 +1,19 @@
 export default class Keyboard {
   static map = {};
-  keypressInterval;
+  static keypressInterval;
 
   static assignHandler(key, action, delay = 150) {
     Keyboard.map[key] = {
       pressed: false,
       lastPressed: Date.now(),
       action,
-      delay
-    }
+      delay,
+    };
   }
 
   static startKeypressInterval() {
     Keyboard.keypressInterval = setInterval(() => {
-      Object.keys(Keyboard.map).forEach(key => {
+      Object.keys(Keyboard.map).forEach((key) => {
         const { pressed, lastPressed, action, delay } = Keyboard.map[key];
         if (pressed) {
           const current = Date.now();
@@ -23,7 +23,7 @@ export default class Keyboard {
             action();
           }
         }
-      })
+      });
     }, 25); // 40 times a second
   }
 
@@ -36,7 +36,7 @@ export default class Keyboard {
       Keyboard.map[key].pressed = true;
     }
   }
-  
+
   static setKeyUp(key) {
     if (Keyboard.map[key]) {
       Keyboard.map[key].pressed = false;

@@ -6,6 +6,8 @@ class Tetronimo {
   x = 4;
   y = 1;
   rotation = 0;
+  orientations = [];
+  color;
 
   get isFrozen() {
     return this.frozen;

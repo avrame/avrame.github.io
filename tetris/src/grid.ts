@@ -1,7 +1,7 @@
 import { paintSquare, fadeSquare, clearSquare } from "./utils.js";
 
-const lineSound = document.getElementById("line_sound");
-const tetrisSound = document.getElementById("tetris_sound");
+const lineSound = <HTMLAudioElement>document.getElementById("line_sound");
+const tetrisSound = <HTMLAudioElement>document.getElementById("tetris_sound");
 
 export default class Grid {
   static squares;
