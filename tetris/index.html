@@ -9,13 +9,16 @@
   <body>
     <main>
       <h1>Tetris!</h1>
+
       <div class="wrapper">
         <aside id="high_scores">
           <h2>High Scores</h2>
           <p>(Click on a score to reveal stats.)</p>
           <ol></ol>
         </aside>
-        <div id="game_area"></div>
+
+        <div class="grid" id="game_area"></div>
+
         <aside id="stats">
           <dl>
             <dt>Level:</dt>
@@ -26,6 +29,12 @@
             <dd id="score">0</dd>
           </dl>
         </aside>
+
+        <aside id="next_tetronimo">
+          <h2>Next</h2>
+          <div class="grid"></div>
+        </aside>
+
         <section id="controls">
           <h2>Controls</h2>
           <dl>
@@ -42,21 +51,25 @@
           </dl>
         </section>
       </div>
-      <div class="modal" id="game_start_modal">
-        <h2>Welcome!</h2>
-        <button class="new_game_btn" type="button">New Game</button>
-      </div>
-      <div class="modal hidden" id="game_over_modal">
-        <h2>Game Over!</h2>
-        <form id="submit_score_form" class="hidden">
-          <h3>You got a high score!</h3>
-          <label for="player_name">Player Name:</label>
-          <input type="text" id="player_name" maxlength="10" />
-          <button id="submit_score_btn">Submit Score</button>
-        </form>
-        <button class="new_game_btn" type="button">New Game</button>
-      </div>
+      <!-- .wrapper -->
     </main>
+
+    <div class="modal" id="game_start_modal">
+      <h2>Welcome!</h2>
+      <button class="new_game_btn" type="button">New Game</button>
+    </div>
+
+    <div class="modal hidden" id="game_over_modal">
+      <h2>Game Over!</h2>
+      <form id="submit_score_form" class="hidden">
+        <h3>You got a high score!</h3>
+        <label for="player_name">Player Name:</label>
+        <input type="text" id="player_name" maxlength="10" />
+        <button id="submit_score_btn">Submit Score</button>
+      </form>
+      <button class="new_game_btn" type="button">New Game</button>
+    </div>
+
     <audio id="move_sound" src="sounds/move.mp3"></audio>
     <audio id="rotate_sound" src="sounds/rotate.mp3"></audio>
     <audio id="land_sound" src="sounds/land.mp3"></audio>
@@ -88,17 +101,11 @@
       firebase.initializeApp(firebaseConfig);
     </script>
 
-    <script type="module" type="text/javascript" src="dist/stats.js"></script>
-    <script
-      type="module"
-      type="text/javascript"
-      src="dist/keyboard.js"
-    ></script>
-    <script
-      type="module"
-      type="text/javascript"
-      src="dist/tetronimos.js"
-    ></script>
-    <script type="module" type="text/javascript" src="dist/main.js"></script>
+    <script type="module" src="dist/stats.js"></script>
+    <script type="module" src="dist/grid.js"></script>
+    <script type="module" src="dist/nextTetronimoGrid.js"></script>
+    <script type="module" src="dist/keyboard.js"></script>
+    <script type="module" src="dist/tetronimos.js"></script>
+    <script type="module" src="dist/main.js"></script>
   </body>
 </html>

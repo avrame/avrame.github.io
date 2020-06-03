@@ -42,36 +42,38 @@ h1 {
   width: 3.2rem;
 }
 
-#game_area {
+.grid {
   display: grid;
-  grid-template-columns: repeat(10, 24px);
-  grid-template-rows: repeat(18, 24px);
   column-gap: 1px;
   row-gap: 1px;
-  width: 249px; /*calc(10 * 25px - 1px);*/
 }
-#game_area b {
+.grid b {
   background-color: #eee;
   border-radius: 2px;
 }
-
-#game_area .r {
+.grid .r {
   background-color: rgb(192, 64, 64);
 }
-#game_area .g {
+.grid .g {
   background-color: rgb(92, 168, 92);
 }
-#game_area .b {
+.grid .b {
   background-color: rgb(96, 96, 255);
 }
-#game_area .y {
+.grid .y {
   background-color: rgb(255, 192, 32);
 }
-#game_area .o {
+.grid .o {
   background-color: rgb(255, 128, 32);
 }
-#game_area .p {
+.grid .p {
   background-color: rgb(128, 64, 192);
+}
+
+#game_area {
+  grid-template-columns: repeat(10, 24px);
+  grid-template-rows: repeat(18, 24px);
+  width: 249px; /*calc(10 * 25px - 1px);*/
 }
 
 #game_area .fade {
@@ -79,11 +81,22 @@ h1 {
   transition: background-color 0.5s linear;
 }
 
+#next_tetronimo {
+  position: absolute;
+  left: calc(100% + 40px);
+  top: 235px;
+}
+#next_tetronimo .grid {
+  grid-template-columns: repeat(4, 24px);
+  grid-template-rows: repeat(4, 24px);
+  width: 99px;
+}
+
 #stats {
   font-size: 36px;
   position: absolute;
-  top: 0;
   left: calc(100% + 20px);
+  top: 0;
   width: 300px;
 }
 #stats dt {

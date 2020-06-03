@@ -1,4 +1,5 @@
 import Grid, { LINE_DROP_DELAY } from "./grid.js";
+import NextTetronimoGrid from "./nextTetronimoGrid.js";
 import Stats from "./stats.js";
 import Keyboard from "./keyboard.js";
 import {
@@ -14,7 +15,9 @@ const INITIAL_DROP_SPEED = 1050;
 let dropSpeed = INITIAL_DROP_SPEED;
 let dropInterval;
 let grid;
+let ntGrid;
 let tetronimo;
+let nextTetronimo;
 let paused = false;
 let clearingRows = false;
 let gameIsOver = false;
@@ -77,14 +80,21 @@ Keyboard.assignHandler(
 );
 
 Stats.getHighScores();
+grid = new Grid();
+ntGrid = new NextTetronimoGrid();
 
 function startGame() {
   gameIsOver = false;
   gameStartModal.classList.add("hidden");
   gameOverModal.classList.add("hidden");
   submitHighScoreForm.classList.add("hidden");
-  grid = new Grid();
+  if (!grid) grid = new Grid();
+  nextTetronimo = getRandomTet();
+  ntGrid.clear();
+  nextTetronimo.render(ntGrid);
   tetronimo = getRandomTet();
+  tetronimo.placeStartPosition();
+  tetronimo.render();
   setDropSpeed();
   startDropInterval();
   Keyboard.startKeypressInterval();
@@ -113,7 +123,12 @@ function freezeCheckRowsNewTet() {
     setDropSpeed();
     const timeOut = completedLineCount === 0 ? 200 : LINE_DROP_DELAY;
     setTimeout(() => {
-      tetronimo = getRandomTet();
+      tetronimo = nextTetronimo;
+      tetronimo.placeStartPosition();
+      tetronimo.render();
+      nextTetronimo = getRandomTet();
+      ntGrid.clear();
+      nextTetronimo.render(ntGrid);
       if (tetronimo.cantMove()) {
         gameOver();
       } else {

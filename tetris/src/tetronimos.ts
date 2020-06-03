@@ -1,11 +1,17 @@
 import Grid from "./grid.js";
 
+interface InitialPosition {
+  x: number;
+  y: number;
+}
+
 class Tetronimo {
   private grid: Grid;
   private frozen: boolean = false;
   private rotation: number = 0;
-  protected x: number = 4;
-  protected y: number = 0;
+  protected initialPosition: InitialPosition;
+  protected x: number = 0;
+  protected y: number = 1;
   protected orientations: Array<Array<number[]>> = [];
   protected color: string;
 
@@ -109,12 +115,12 @@ class Tetronimo {
     }
   }
 
-  render() {
+  render(grid = this.grid) {
     const shape = this.orientations[this.rotation];
     for (let y = 0; y < shape.length; y++) {
       for (let x = 0; x < shape[0].length; x++) {
         if (shape[y][x] === 1) {
-          this.grid.paintSquare(this.y + y, this.x + x, this.color);
+          grid.paintSquare(this.y + y, this.x + x, this.color);
         }
       }
     }
@@ -131,10 +137,16 @@ class Tetronimo {
       }
     }
   }
+
+  placeStartPosition() {
+    this.x = this.initialPosition.x;
+    this.y = this.initialPosition.y;
+  }
 }
 
 export class S_Type extends Tetronimo {
   color = "p";
+  initialPosition = { x: 4, y: 0 };
   orientations = [
     [
       [0, 1, 1],
@@ -149,12 +161,12 @@ export class S_Type extends Tetronimo {
 
   constructor(grid) {
     super(grid);
-    this.render();
   }
 }
 
 export class Z_Type extends Tetronimo {
   color = "y";
+  initialPosition = { x: 4, y: 0 };
   orientations = [
     [
       [1, 1, 0],
@@ -169,12 +181,12 @@ export class Z_Type extends Tetronimo {
 
   constructor(grid) {
     super(grid);
-    this.render();
   }
 }
 
 export class T_Type extends Tetronimo {
   color = "g";
+  initialPosition = { x: 4, y: 0 };
   orientations = [
     [
       [0, 1, 0],
@@ -199,13 +211,12 @@ export class T_Type extends Tetronimo {
 
   constructor(grid) {
     super(grid);
-    this.render();
   }
 }
 
 export class L_Type extends Tetronimo {
   color = "o";
-  x = 3;
+  initialPosition = { x: 4, y: 0 };
   orientations = [
     [
       [0, 0, 1],
@@ -230,12 +241,12 @@ export class L_Type extends Tetronimo {
 
   constructor(grid) {
     super(grid);
-    this.render();
   }
 }
 
 export class RL_Type extends Tetronimo {
   color = "r";
+  initialPosition = { x: 4, y: 0 };
   orientations = [
     [
       [1, 0, 0],
@@ -260,13 +271,12 @@ export class RL_Type extends Tetronimo {
 
   constructor(grid) {
     super(grid);
-    this.render();
   }
 }
 
 export class I_Type extends Tetronimo {
   color = "b";
-  x = 3;
+  initialPosition = { x: 3, y: 0 };
   orientations = [
     [[1, 1, 1, 1]],
     [
@@ -279,6 +289,5 @@ export class I_Type extends Tetronimo {
 
   constructor(grid) {
     super(grid);
-    this.render();
   }
 }
