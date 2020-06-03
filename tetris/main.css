@@ -18,13 +18,13 @@ html {
 }
 
 #high_scores {
-  font-size: 14px;
+  font-size: 18px;
   position: absolute;
   right: 275px;
   width: 200px;
 }
 #high_scores ol {
-  letter-spacing: 0.06rem;
+  letter-spacing: 0.07rem;
   padding: 0;
   counter-reset: li;
 }
@@ -139,4 +139,9 @@ html {
   display: block;
   width: 90px;
   margin: 0 auto;
+}
+#submit_score_btn {
+  display: block;
+  width: 6.4rem;
+  margin: 1rem auto;
 }

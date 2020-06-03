@@ -11,6 +11,7 @@
       <div class="wrapper">
         <aside id="high_scores">
           <h2>High Scores</h2>
+          <p>(Click on a score to reveal stats.)</p>
           <ol></ol>
         </aside>
         <div id="game_area"></div>
@@ -45,8 +46,8 @@
         <form id="submit_score_form" class="hidden">
           <h3>You got a high score!</h3>
           <label for="player_name">Player Name:</label>
-          <input type="text" id="player_name" />
-          <button>Submit Score</button>
+          <input type="text" id="player_name" maxlength="10" />
+          <button id="submit_score_btn">Submit Score</button>
         </form>
         <button id="new_game_btn" type="button">New Game</button>
       </div>

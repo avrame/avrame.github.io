@@ -71,11 +71,12 @@ export default class Stats {
       const dateStr = `${dateObj.getMonth()}/${dateObj.getDate()}/${dateObj.getFullYear()} ${dateObj.getHours()}:${dateObj.getMinutes()}`;
       const scoreListing = document.createElement("li");
       scoreListing.innerHTML = `
-          <b>Player:</b> <span>${player}</span><br />
-          <b>Score:</b> <span>${score}</span><br />
-          <b>Level:</b> <span>${level}</span><br />
-          <b>Lines:</b> <span>${lines}</span><br />
-          <b>Date:</b> <span>${dateStr}</span>
+          <details>
+            <summary>${score} &mdash; ${player}</summary>
+            <b>Level:</b> <span>${level}</span><br />
+            <b>Lines:</b> <span>${lines}</span><br />
+            <b>Date:</b> <span>${dateStr}</span>
+          </details>
       `;
       highScoresList.appendChild(scoreListing);
     });
