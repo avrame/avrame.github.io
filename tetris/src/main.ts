@@ -30,6 +30,7 @@ const gameOverSound = <HTMLAudioElement>(
 
 // Game over modal
 const gameOverModal = document.getElementById("game_over_modal");
+const submitHighScoreForm = document.getElementById("submit_score_form");
 
 // New game button
 const newGameBtn = document.getElementById("new_game_btn");
@@ -76,10 +77,12 @@ Keyboard.assignHandler(
 
 // Initialize and Start game
 startGame();
+Stats.getHighScores();
 
 function startGame() {
   gameIsOver = false;
   gameOverModal.classList.add("hidden");
+  submitHighScoreForm.classList.add("hidden");
   grid = new Grid();
   tetronimo = getRandomTet();
   setDropSpeed();
@@ -130,10 +133,15 @@ function gameOver() {
   gameIsOver = true;
   gameOverSound.play();
   clearInterval(dropInterval);
-  showGameOverModal();
+  const hsIndex = Math.min(10, Stats.highScores.length);
+  const hasHighScore = Stats.score > Stats.highScores[hsIndex - 1].score;
+  showGameOverModal(hasHighScore);
 }
 
-function showGameOverModal() {
+function showGameOverModal(hasHighScore) {
+  if (hasHighScore) {
+    submitHighScoreForm.classList.remove("hidden");
+  }
   gameOverModal.classList.remove("hidden");
 }
 
@@ -155,10 +163,16 @@ function getRandomTet() {
   }
 }
 
-// On Keydown
+// On Keydownk
 document.body.addEventListener("keydown", (ev) => {
-  // console.log(ev)
   const key = ev.key;
+  const target = <HTMLElement>ev.target;
+
+  // Prevent the page scrolling down
+  if (target.tagName === "BODY") {
+    ev.preventDefault();
+  }
+
   Keyboard.setKeyDown(key);
 
   if (key === "p") {

@@ -1,12 +1,17 @@
 const levelEl = document.getElementById("level");
 const linesEl = document.getElementById("lines");
 const scoreEl = document.getElementById("score");
+let highScoresList = document.querySelector("#high_scores ol");
+const submitScoreForm = document.getElementById("submit_score_form");
 const levelSound = <HTMLAudioElement>document.getElementById("level_sound");
+
+declare const firebase;
 
 export default class Stats {
   static lines = 0;
   static score = 0;
   static level = 1;
+  static highScores = [];
 
   static updateStats(completedLineCount) {
     Stats.increaseLines(completedLineCount);
@@ -50,4 +55,46 @@ export default class Stats {
     Stats.score += Stats.level * multiplier;
     scoreEl.innerText = Stats.score.toString();
   }
+
+  static async getHighScores() {
+    highScoresList = document.querySelector("#high_scores ol");
+    highScoresList.innerHTML = "";
+    const db = firebase.firestore();
+    const snapShot = await db.collection("scores").get();
+    snapShot.forEach((doc) => {
+      Stats.highScores.push(doc.data());
+    });
+    Stats.highScores.sort((a, b) => b.score - a.score);
+    Stats.highScores = Stats.highScores.slice(0, 10);
+    Stats.highScores.forEach(({ player, score, level, lines, date }) => {
+      const dateObj = date.toDate();
+      const dateStr = `${dateObj.getMonth()}/${dateObj.getDate()}/${dateObj.getFullYear()} ${dateObj.getHours()}:${dateObj.getMinutes()}`;
+      const scoreListing = document.createElement("li");
+      scoreListing.innerHTML = `
+          <b>Player:</b> <span>${player}</span><br />
+          <b>Score:</b> <span>${score}</span><br />
+          <b>Level:</b> <span>${level}</span><br />
+          <b>Lines:</b> <span>${lines}</span><br />
+          <b>Date:</b> <span>${dateStr}</span>
+      `;
+      highScoresList.appendChild(scoreListing);
+    });
+  }
 }
+
+submitScoreForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  const playerNameField = <HTMLInputElement>(
+    document.getElementById("player_name")
+  );
+  const db = firebase.firestore();
+  await db.collection("scores").add({
+    player: playerNameField.value,
+    score: Stats.score,
+    level: Stats.level,
+    lines: Stats.lines,
+    date: new Date(),
+  });
+  submitScoreForm.classList.add("hidden");
+  Stats.getHighScores();
+});

@@ -16,6 +16,27 @@ html {
   margin: 0 auto;
   position: relative;
 }
+
+#high_scores {
+  font-size: 14px;
+  position: absolute;
+  right: 275px;
+  width: 200px;
+}
+#high_scores ol {
+  letter-spacing: 0.06rem;
+  padding: 0;
+  counter-reset: li;
+}
+#high_scores li {
+  margin-bottom: 1rem;
+}
+#high_scores b {
+  display: inline-block;
+  text-align: right;
+  width: 3.2rem;
+}
+
 #game_area {
   display: grid;
   grid-template-columns: repeat(10, 24px);
@@ -114,7 +135,7 @@ html {
   text-align: center;
   margin: 0 0 1rem;
 }
-#game_over_modal button {
+#game_over_modal #new_game_btn {
   display: block;
   width: 90px;
   margin: 0 auto;

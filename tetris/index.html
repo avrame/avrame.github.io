@@ -5,22 +5,14 @@
     <title>Tetris</title>
     <meta name="description" content="Tetris in JavaScript" />
     <link rel="stylesheet" href="main.css" />
-    <script type="module" type="text/javascript" src="dist/stats.js"></script>
-    <script
-      type="module"
-      type="text/javascript"
-      src="dist/keyboard.js"
-    ></script>
-    <script
-      type="module"
-      type="text/javascript"
-      src="dist/tetronimos.js"
-    ></script>
-    <script type="module" type="text/javascript" src="dist/main.js"></script>
   </head>
   <body>
     <main>
       <div class="wrapper">
+        <aside id="high_scores">
+          <h2>High Scores</h2>
+          <ol></ol>
+        </aside>
         <div id="game_area"></div>
         <aside id="stats">
           <dl>
@@ -50,6 +42,12 @@
       </div>
       <div id="game_over_modal" class="hidden">
         <h2>Game Over!</h2>
+        <form id="submit_score_form" class="hidden">
+          <h3>You got a high score!</h3>
+          <label for="player_name">Player Name:</label>
+          <input type="text" id="player_name" />
+          <button>Submit Score</button>
+        </form>
         <button id="new_game_btn" type="button">New Game</button>
       </div>
     </main>
@@ -61,5 +59,40 @@
     <audio id="level_sound" src="sounds/level.mp3"></audio>
     <audio id="pause_sound" src="sounds/pause.mp3"></audio>
     <audio id="game_over_sound" src="sounds/gameover.mp3"></audio>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.6/firebase-firestore.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyDY0WWFfyX0rhg7wPm9b7PkMuRS4BepIWs",
+        authDomain: "tetris-scores-706c6.firebaseapp.com",
+        databaseURL: "https://tetris-scores-706c6.firebaseio.com",
+        projectId: "tetris-scores-706c6",
+        storageBucket: "tetris-scores-706c6.appspot.com",
+        messagingSenderId: "439849935748",
+        appId: "1:439849935748:web:c81079b41aaba59cabf3d1",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script type="module" type="text/javascript" src="dist/stats.js"></script>
+    <script
+      type="module"
+      type="text/javascript"
+      src="dist/keyboard.js"
+    ></script>
+    <script
+      type="module"
+      type="text/javascript"
+      src="dist/tetronimos.js"
+    ></script>
+    <script type="module" type="text/javascript" src="dist/main.js"></script>
   </body>
 </html>

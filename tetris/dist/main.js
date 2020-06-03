@@ -16,6 +16,7 @@ const landSound = document.getElementById("land_sound");
 const pauseSound = document.getElementById("pause_sound");
 const gameOverSound = (document.getElementById("game_over_sound"));
 const gameOverModal = document.getElementById("game_over_modal");
+const submitHighScoreForm = document.getElementById("submit_score_form");
 const newGameBtn = document.getElementById("new_game_btn");
 newGameBtn.addEventListener("click", startGame);
 Keyboard.assignHandler("ArrowDown", () => {
@@ -44,9 +45,11 @@ Keyboard.assignHandler("z", () => {
     }
 }, 250);
 startGame();
+Stats.getHighScores();
 function startGame() {
     gameIsOver = false;
     gameOverModal.classList.add("hidden");
+    submitHighScoreForm.classList.add("hidden");
     grid = new Grid();
     tetronimo = getRandomTet();
     setDropSpeed();
@@ -93,9 +96,14 @@ function gameOver() {
     gameIsOver = true;
     gameOverSound.play();
     clearInterval(dropInterval);
-    showGameOverModal();
+    const hsIndex = Math.min(10, Stats.highScores.length);
+    const hasHighScore = Stats.score > Stats.highScores[hsIndex - 1].score;
+    showGameOverModal(hasHighScore);
 }
-function showGameOverModal() {
+function showGameOverModal(hasHighScore) {
+    if (hasHighScore) {
+        submitHighScoreForm.classList.remove("hidden");
+    }
     gameOverModal.classList.remove("hidden");
 }
 function getRandomTet() {
@@ -117,6 +125,10 @@ function getRandomTet() {
 }
 document.body.addEventListener("keydown", (ev) => {
     const key = ev.key;
+    const target = ev.target;
+    if (target.tagName === "BODY") {
+        ev.preventDefault();
+    }
     Keyboard.setKeyDown(key);
     if (key === "p") {
         paused = !paused;
