@@ -262,4 +262,18 @@ export class I_Type extends Tetronimo {
         ];
     }
 }
+export class O_Type extends Tetronimo {
+    constructor(grid) {
+        super(grid);
+        this.color = "c";
+        this.x = 1;
+        this.initialPosition = { x: 3, y: 0 };
+        this.orientations = [
+            [
+                [1, 1],
+                [1, 1],
+            ],
+        ];
+    }
+}
 //# sourceMappingURL=tetronimos.js.map

@@ -9,6 +9,7 @@ import {
   L_Type,
   RL_Type,
   I_Type,
+  O_Type,
 } from "./tetronimos.js";
 
 const INITIAL_DROP_SPEED = 1050;
@@ -161,7 +162,7 @@ function showGameOverModal(hasHighScore) {
 }
 
 function getRandomTet() {
-  const randInt = Math.floor(Math.random() * 6);
+  const randInt = Math.floor(Math.random() * 7);
   switch (randInt) {
     case 0:
       return new S_Type(grid);
@@ -175,6 +176,8 @@ function getRandomTet() {
       return new RL_Type(grid);
     case 5:
       return new I_Type(grid);
+    case 6:
+      return new O_Type(grid);
   }
 }
 

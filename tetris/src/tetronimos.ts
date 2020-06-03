@@ -291,3 +291,19 @@ export class I_Type extends Tetronimo {
     super(grid);
   }
 }
+
+export class O_Type extends Tetronimo {
+  color = "c";
+  x = 1;
+  initialPosition = { x: 3, y: 0 };
+  orientations = [
+    [
+      [1, 1],
+      [1, 1],
+    ],
+  ];
+
+  constructor(grid) {
+    super(grid);
+  }
+}

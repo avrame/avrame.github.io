@@ -69,6 +69,9 @@ h1 {
 .grid .p {
   background-color: rgb(128, 64, 192);
 }
+.grid .c {
+  background-color: rgb(128, 192, 228);
+}
 
 #game_area {
   grid-template-columns: repeat(10, 24px);
