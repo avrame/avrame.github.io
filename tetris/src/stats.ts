@@ -59,6 +59,7 @@ export default class Stats {
   static async getHighScores() {
     highScoresList = document.querySelector("#high_scores ol");
     highScoresList.innerHTML = "";
+    Stats.highScores = [];
     const db = firebase.firestore();
     const snapShot = await db.collection("scores").get();
     snapShot.forEach((doc) => {

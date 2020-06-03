@@ -57,6 +57,7 @@ let Stats = (() => {
             return __awaiter(this, void 0, void 0, function* () {
                 highScoresList = document.querySelector("#high_scores ol");
                 highScoresList.innerHTML = "";
+                Stats.highScores = [];
                 const db = firebase.firestore();
                 const snapShot = yield db.collection("scores").get();
                 snapShot.forEach((doc) => {
