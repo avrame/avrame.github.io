@@ -11,6 +11,11 @@ html {
   display: none;
 }
 
+h1 {
+  font-size: 52px;
+  text-align: center;
+}
+
 .wrapper {
   width: 249px;
   margin: 0 auto;
@@ -119,23 +124,30 @@ html {
   margin-left: 0.5rem;
 }
 
-#game_over_modal {
+.modal {
   background: #ddd;
   padding: 1rem;
-  width: 260px;
-  margin: 0 auto;
   position: absolute;
   left: 50%;
   top: 170px;
+  margin: 0 auto;
   transform: translate(-50%);
   border: 3px solid #888;
   border-radius: 8px;
 }
-#game_over_modal h2 {
+.modal h2 {
   text-align: center;
   margin: 0 0 1rem;
 }
-#game_over_modal #new_game_btn {
+
+#game_start_modal {
+  width: 260px;
+}
+
+#game_over_modal {
+  width: 260px;
+}
+.new_game_btn {
   display: block;
   width: 90px;
   margin: 0 auto;

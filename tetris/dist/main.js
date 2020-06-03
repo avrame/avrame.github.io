@@ -15,10 +15,11 @@ const rotateSound = document.getElementById("rotate_sound");
 const landSound = document.getElementById("land_sound");
 const pauseSound = document.getElementById("pause_sound");
 const gameOverSound = (document.getElementById("game_over_sound"));
+const gameStartModal = document.getElementById("game_start_modal");
 const gameOverModal = document.getElementById("game_over_modal");
 const submitHighScoreForm = document.getElementById("submit_score_form");
-const newGameBtn = document.getElementById("new_game_btn");
-newGameBtn.addEventListener("click", startGame);
+const newGameBtns = document.querySelectorAll(".new_game_btn");
+newGameBtns.forEach((btn) => btn.addEventListener("click", startGame));
 Keyboard.assignHandler("ArrowDown", () => {
     if (!gameIsOver && !tetronimo.isFrozen && !tetronimo.moveDown()) {
         freezeCheckRowsNewTet();
@@ -44,10 +45,10 @@ Keyboard.assignHandler("z", () => {
         rotateSound.play();
     }
 }, 250);
-startGame();
 Stats.getHighScores();
 function startGame() {
     gameIsOver = false;
+    gameStartModal.classList.add("hidden");
     gameOverModal.classList.add("hidden");
     submitHighScoreForm.classList.add("hidden");
     grid = new Grid();

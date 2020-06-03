@@ -8,6 +8,7 @@
   </head>
   <body>
     <main>
+      <h1>Tetris!</h1>
       <div class="wrapper">
         <aside id="high_scores">
           <h2>High Scores</h2>
@@ -41,7 +42,11 @@
           </dl>
         </section>
       </div>
-      <div id="game_over_modal" class="hidden">
+      <div class="modal" id="game_start_modal">
+        <h2>Welcome!</h2>
+        <button class="new_game_btn" type="button">New Game</button>
+      </div>
+      <div class="modal hidden" id="game_over_modal">
         <h2>Game Over!</h2>
         <form id="submit_score_form" class="hidden">
           <h3>You got a high score!</h3>
@@ -49,7 +54,7 @@
           <input type="text" id="player_name" maxlength="10" />
           <button id="submit_score_btn">Submit Score</button>
         </form>
-        <button id="new_game_btn" type="button">New Game</button>
+        <button class="new_game_btn" type="button">New Game</button>
       </div>
     </main>
     <audio id="move_sound" src="sounds/move.mp3"></audio>

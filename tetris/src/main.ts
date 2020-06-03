@@ -28,13 +28,14 @@ const gameOverSound = <HTMLAudioElement>(
   document.getElementById("game_over_sound")
 );
 
-// Game over modal
+// Modals
+const gameStartModal = document.getElementById("game_start_modal");
 const gameOverModal = document.getElementById("game_over_modal");
 const submitHighScoreForm = document.getElementById("submit_score_form");
 
-// New game button
-const newGameBtn = document.getElementById("new_game_btn");
-newGameBtn.addEventListener("click", startGame);
+// New game buttons
+const newGameBtns = document.querySelectorAll(".new_game_btn");
+newGameBtns.forEach((btn) => btn.addEventListener("click", startGame));
 
 // Assign key handlers
 Keyboard.assignHandler("ArrowDown", () => {
@@ -75,12 +76,11 @@ Keyboard.assignHandler(
   250
 );
 
-// Initialize and Start game
-startGame();
 Stats.getHighScores();
 
 function startGame() {
   gameIsOver = false;
+  gameStartModal.classList.add("hidden");
   gameOverModal.classList.add("hidden");
   submitHighScoreForm.classList.add("hidden");
   grid = new Grid();
