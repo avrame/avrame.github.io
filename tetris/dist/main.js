@@ -49,7 +49,7 @@ Keyboard.assignHandler("z", () => {
     }
 }, 250);
 Stats.getHighScores();
-grid = new Grid();
+Grid.create_HTML_Grid();
 ntGrid = new NextTetronimoGrid();
 function startGame() {
     gameIsOver = false;

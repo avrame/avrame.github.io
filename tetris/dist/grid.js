@@ -5,11 +5,20 @@ let Grid = (() => {
     class Grid {
         constructor() {
             this.squares = [];
-            this.create_HTML_Grid();
             for (let y = 0; y < Grid.height; y++) {
                 this.squares.push(new Array(Grid.width).fill(null));
             }
             this.render();
+        }
+        static create_HTML_Grid() {
+            const ga = document.getElementById("game_area");
+            for (let y = 0; y < Grid.height; y++) {
+                for (let x = 0; x < Grid.width; x++) {
+                    const b = document.createElement("b");
+                    b.id = `s_${x}_${y}`;
+                    ga.appendChild(b);
+                }
+            }
         }
         removeCompletedLines() {
             let rowCount = 0;
@@ -36,16 +45,6 @@ let Grid = (() => {
         }
         setSquareColor(y, x, color) {
             this.squares[y][x] = color;
-        }
-        create_HTML_Grid() {
-            const ga = document.getElementById("game_area");
-            for (let y = 0; y < Grid.height; y++) {
-                for (let x = 0; x < Grid.width; x++) {
-                    const b = document.createElement("b");
-                    b.id = `s_${x}_${y}`;
-                    ga.appendChild(b);
-                }
-            }
         }
         paintSquare(y, x, color) {
             const el = document.getElementById(`s_${x}_${y}`);

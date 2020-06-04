@@ -9,11 +9,21 @@ export default class Grid {
   static height = 18;
 
   constructor() {
-    this.create_HTML_Grid();
     for (let y = 0; y < Grid.height; y++) {
       this.squares.push(new Array(Grid.width).fill(null));
     }
     this.render();
+  }
+
+  static create_HTML_Grid() {
+    const ga = document.getElementById("game_area");
+    for (let y = 0; y < Grid.height; y++) {
+      for (let x = 0; x < Grid.width; x++) {
+        const b = document.createElement("b");
+        b.id = `s_${x}_${y}`;
+        ga.appendChild(b);
+      }
+    }
   }
 
   public removeCompletedLines() {
@@ -43,17 +53,6 @@ export default class Grid {
 
   public setSquareColor(y, x, color) {
     this.squares[y][x] = color;
-  }
-
-  private create_HTML_Grid() {
-    const ga = document.getElementById("game_area");
-    for (let y = 0; y < Grid.height; y++) {
-      for (let x = 0; x < Grid.width; x++) {
-        const b = document.createElement("b");
-        b.id = `s_${x}_${y}`;
-        ga.appendChild(b);
-      }
-    }
   }
 
   public paintSquare(y, x, color) {
