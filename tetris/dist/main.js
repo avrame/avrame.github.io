@@ -56,8 +56,7 @@ function startGame() {
     gameStartModal.classList.add("hidden");
     gameOverModal.classList.add("hidden");
     submitHighScoreForm.classList.add("hidden");
-    if (!grid)
-        grid = new Grid();
+    grid = new Grid();
     nextTetronimo = getRandomTet();
     ntGrid.clear();
     nextTetronimo.render(ntGrid);
