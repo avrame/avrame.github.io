@@ -29,22 +29,22 @@ Keyboard.assignHandler("ArrowDown", () => {
     }
 });
 Keyboard.assignHandler("ArrowLeft", () => {
-    if (!gameIsOver && tetronimo.moveLeft()) {
+    if (!gameIsOver && !tetronimo.isFrozen && tetronimo.moveLeft()) {
         moveSound.play();
     }
 });
 Keyboard.assignHandler("ArrowRight", () => {
-    if (!gameIsOver && tetronimo.moveRight()) {
+    if (!gameIsOver && !tetronimo.isFrozen && tetronimo.moveRight()) {
         moveSound.play();
     }
 });
 Keyboard.assignHandler("x", () => {
-    if (!gameIsOver && tetronimo.rotateCW()) {
+    if (!gameIsOver && !tetronimo.isFrozen && tetronimo.rotateCW()) {
         rotateSound.play();
     }
 }, 250);
 Keyboard.assignHandler("z", () => {
-    if (!gameIsOver && tetronimo.rotateCCW()) {
+    if (!gameIsOver && !tetronimo.isFrozen && tetronimo.rotateCCW()) {
         rotateSound.play();
     }
 }, 250);
