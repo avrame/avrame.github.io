@@ -267,7 +267,7 @@ export class O_Type extends Tetronimo {
         super(grid);
         this.color = "c";
         this.x = 1;
-        this.initialPosition = { x: 3, y: 0 };
+        this.initialPosition = { x: 4, y: 0 };
         this.orientations = [
             [
                 [1, 1],
