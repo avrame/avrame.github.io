@@ -85,6 +85,9 @@ let Stats = (() => {
             Stats.lines = 0;
             Stats.score = 0;
             Stats.level = 1;
+            linesEl.innerText = "0";
+            scoreEl.innerText = "0";
+            levelEl.innerText = "1";
         }
     }
     Stats.lines = 0;
