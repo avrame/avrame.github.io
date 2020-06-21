@@ -81,6 +81,11 @@ let Stats = (() => {
                 });
             });
         }
+        static reset() {
+            Stats.lines = 0;
+            Stats.score = 0;
+            Stats.level = 1;
+        }
     }
     Stats.lines = 0;
     Stats.score = 0;

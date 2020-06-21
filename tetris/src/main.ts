@@ -85,6 +85,7 @@ Grid.create_HTML_Grid();
 ntGrid = new NextTetronimoGrid();
 
 function startGame() {
+  Stats.reset();
   gameIsOver = false;
   gameStartModal.classList.add("hidden");
   gameOverModal.classList.add("hidden");

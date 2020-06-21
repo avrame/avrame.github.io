@@ -82,6 +82,12 @@ export default class Stats {
       highScoresList.appendChild(scoreListing);
     });
   }
+
+  static reset() {
+    Stats.lines = 0;
+    Stats.score = 0;
+    Stats.level = 1;
+  }
 }
 
 submitScoreForm.addEventListener("submit", async (event) => {
